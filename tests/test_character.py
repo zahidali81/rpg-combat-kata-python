@@ -41,3 +41,19 @@ class TestCharacter:
         character1.deal(character2, -100)
         assert character2.health == 1100
         assert character2.alive == True
+        
+    def test_heal(self):
+        character = Character()
+        character.health = 500
+        character.healing()
+        assert character.health == 1000
+
+    def test_heal_dead(self):
+        character = Character()
+        character.alive = False
+        character.health = 0
+        character.healing()
+        character.alive = False
+        assert character.health == 0    
+    
+
