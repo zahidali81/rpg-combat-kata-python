@@ -41,7 +41,7 @@ class TestCharacter:
         character1.deal(character2, -100)
         assert character2.health == 1100
         assert character2.alive == True
-        
+
     def test_heal(self):
         character = Character()
         character.health = 500
@@ -54,6 +54,32 @@ class TestCharacter:
         character.health = 0
         character.healing()
         character.alive = False
-        assert character.health == 0    
-    
+        assert character.health == 0
 
+    def test_initial_experience(self):
+        character = Character()
+        assert character.experience == 0
+
+    def test_gain_experience(self):
+        character = Character()
+        character.gainexperience(20)
+        assert character.experience == 20
+        assert character.level == 1
+
+    def test_level_up(self):
+        character = Character()
+        character.gainexperience(50)
+        assert character.level == 2
+        assert character.experience == 0
+
+    def test_max_level(self):
+        character = Character()
+        for i in range(120):
+            character.gainexperience(100*100*10)
+        assert character.level == 100
+
+    def test_negative_exp(self):
+        character = Character()
+        character.gainexperience(-10)
+        assert character.level == 1
+        assert character.experience == 0
